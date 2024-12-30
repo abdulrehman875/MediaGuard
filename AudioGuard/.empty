@@ -1,1 +1,36 @@
+1. Load and Process Audio
+The code loads an audio file (original_audio.ogg) using librosa.
+It extracts the raw audio signal (y) and its sampling rate (sr).
+2. Add Inaudible Noise
+Noise Reduction Techniques:
+add_inaudible_noise: Adds high-frequency noise components that are not perceptible to human hearing.
+add_phase_shifts: Modifies the phase of the audio to introduce inaudible shifts.
+add_perceptual_noise: Adds noise to perceptually significant regions of the audio.
+These transformations are applied sequentially to create a noisy version of the audio.
+3. Save and Analyze Noisy Audio
+The noisy audio is saved as a WAV file (noisy_voice_message.wav).
+It is resampled to 16 kHz for use with the YAMNet model (pre-trained for audio event classification).
+4. Extract Embeddings
+The original and noisy audio signals are passed through YAMNet to extract feature embeddings.
+The embeddings are compared using cosine similarity to quantify how similar the noisy audio is to the original.
+5. Visualize Results
+Two visualizations are created:
+A line plot comparing embeddings of the original and noisy audio.
+A heatmap showing cosine similarity between the embeddings.
+6. Noise Reduction
+A spectral noise gating technique (reduce_noise_spectral_gate) reduces the noise in the audio.
+The noise-reduced audio is saved as denoised_spectral.wav.
+7. Analyze Denoised Audio
+The denoised audio is resampled to 16 kHz and passed through YAMNet to extract embeddings.
+These embeddings are compared to the original embeddings using cosine similarity.
+Similarity results are visualized in the same way as before.
+8. Outputs
+The cosine similarity scores quantify the impact of noise addition and reduction on the embeddings.
+The visualizations help to understand how the noise and denoising processes affect the audio's features.
+Summary
+The code implements a complete pipeline for:
 
+Adding inaudible noise to an audio signal.
+Evaluating the similarity of the noisy audio to the original.
+Reducing the noise using spectral gating.
+Comparing and visualizing the embeddings of the original, noisy, and denoised audio.
